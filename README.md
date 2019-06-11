@@ -5,7 +5,7 @@ kleines Programm um Kunden in Gruppen einzuteilen und die Anwesenheitszeiten zu 
 Installation
 
 Benötigt: 
-Eclipse https://www.eclipse.org/downloads/
+Eclipse https://www.eclipse.org/downloads/                
 Xampp https://www.apachefriends.org/de/download.html (für MySQL)
 Navicat https://www.chip.de/downloads/Navicat-Lite_70358373.html
 
