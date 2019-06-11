@@ -1,6 +1,8 @@
 package Main;
 
 
+import java.beans.PropertyVetoException;
+
 import javax.swing.JInternalFrame;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
@@ -9,10 +11,15 @@ import javax.swing.event.InternalFrameListener;
 //Listener der die eingabe in die ToolBar der InternalFrames überwacht.
 public class Listener implements InternalFrameListener
 {
-	JInternalFrame frame;
+	JInternalFrame frame,pan;
 	
 	public Listener(JInternalFrame frame) {
 		
+		this.frame = frame;
+	}
+	
+	public Listener(JInternalFrame frame,JInternalFrame pan) {
+		this.pan = pan;
 		this.frame = frame;
 	}
 
@@ -47,6 +54,13 @@ public class Listener implements InternalFrameListener
 		if (frame.getToolTipText()== "Info") {
 			
 			Var.setBtn_edit(false);
+			try {
+				pan.setIcon(false);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 	}
 

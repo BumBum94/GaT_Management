@@ -36,16 +36,23 @@ public class GUI_Kunden extends JInternalFrame {
 
 	}
 	
+	
 private void startDetails(int row, int column) {
+	
+		String name = (String) table.getValueAt(row, 1);
+		String vname = (String) table.getValueAt(row, 2);
+		int x = (int) table.getValueAt(row, 0);
 		
-		int x = (int) table.getValueAt(row, column);
-		pan.add(new GUI_Details_K(x));
+		int i =JOptionPane.showConfirmDialog(pan, "Wollen Sie "+vname+" "+name+" bearbeiten ?","Bearbeiten",JOptionPane.YES_NO_OPTION);
+		if(i == 0) { 
+		pan.add(new GUI_Details_K(x,this));
 		System.out.println(x);
 		try {
 			setIcon(true);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 	}
 	private void initialize() {
@@ -87,11 +94,10 @@ private void startDetails(int row, int column) {
 	    	public boolean isCellEditable(int row, int column)
 	    	{
 	    		
-	    		int i =JOptionPane.showConfirmDialog(pan, "Wollen Sie diesen Kunden bearbeiten ?","Bearbeiten",JOptionPane.YES_NO_OPTION);
-	    		if(i == 0) { 
+	    		
 	    		startDetails(row, column);
-	    		clicked =0;
-	    		}
+	    		
+	    		
 	    		
 	    		return false;
 	    	}

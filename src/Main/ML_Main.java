@@ -52,12 +52,12 @@ public ML_Main(JLabel lbl) {
 			}
 		}
 			
-		if (lbl.getToolTipText() == "Kunde bearbeiten" & Var.isBtn_edit() == false) {
-			
-			int i = Integer.parseInt(JOptionPane.showInputDialog("Bitte die ID des Kunden eingeben"));
-			panel.add(new GUI_Details_K(i));
-			Var.setBtn_edit(true);
-		}
+//		if (lbl.getToolTipText() == "Kunde bearbeiten" & Var.isBtn_edit() == false) {
+//			
+//			int i = Integer.parseInt(JOptionPane.showInputDialog("Bitte die ID des Kunden eingeben"));
+//			panel.add(new GUI_Details_K(i));
+//			Var.setBtn_edit(true);
+//		}
 		if (lbl.getToolTipText() == "Kunden" & Var.isBtn_customer() == false) {
 		
 			panel.add(new GUI_Kunden(panel));

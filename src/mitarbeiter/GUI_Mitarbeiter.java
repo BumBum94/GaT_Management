@@ -7,12 +7,14 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Main.Listener;
+import kunden.GUI_Details_K;
 
 public class GUI_Mitarbeiter extends JInternalFrame {
 
@@ -37,14 +39,20 @@ public class GUI_Mitarbeiter extends JInternalFrame {
 
 	private void startDetails(int row, int column) {
 		
-		int x = (int) table.getValueAt(row, column);
-		pan.add(new GUI_Details_M(x));
+		String name = (String) table.getValueAt(row, 1);
+		String vname = (String) table.getValueAt(row, 2);
+		int x = (int) table.getValueAt(row, 0);
+		
+		int i =JOptionPane.showConfirmDialog(pan, "Wollen Sie "+vname+" "+name+" bearbeiten ?","Bearbeiten",JOptionPane.YES_NO_OPTION);
+		if(i == 0) { 
+		pan.add(new GUI_Details_M(x,this));
 		System.out.println(x);
 		try {
 			setIcon(true);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 	}
 	

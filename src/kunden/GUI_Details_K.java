@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,6 +46,7 @@ public class GUI_Details_K extends JInternalFrame {
 	Choice choice_gesch;
 	JLabel image;
 	int id;
+	JInternalFrame pan;
 	
 	String name,vorname,strasse, ort,  email, mutter, vater,  anmerkung, bild, geb;
 	int hausnr,plz,telnr,geschlecht;
@@ -53,8 +55,9 @@ public class GUI_Details_K extends JInternalFrame {
 	private AL_GUI_New al = new AL_GUI_New(this);
 	private MySQLZugriff mz;
 	
-	public GUI_Details_K(int i) {
+	public GUI_Details_K(int i,JInternalFrame pan) {
 		
+		this.pan = pan;
 		this.id = i;
 		mz= new MySQLZugriff(i);
 		try {
@@ -95,7 +98,7 @@ public class GUI_Details_K extends JInternalFrame {
 		setIconifiable(true);
 		getContentPane().setLayout(null);
 //		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		addInternalFrameListener(new Listener(this));
+		addInternalFrameListener(new Listener(this,pan));
 		
 		
 		JButton btnSchlieen = new JButton("Beenden");
@@ -324,6 +327,12 @@ class AL_GUI_New implements ActionListener{
 		if (s.equals("Beenden")) {
 			frame.dispose();
 			Var.setBtn_edit(false);
+			try {
+				pan.setIcon(false);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (s.equals("Speichern")) {
 			
