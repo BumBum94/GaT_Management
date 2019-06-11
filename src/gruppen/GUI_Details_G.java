@@ -36,7 +36,7 @@ public class GUI_Details_G extends JInternalFrame {
 
 	private AL_GUI_New al = new AL_GUI_New(this);
 	private MySQLZugriff mz;
-	Border mb_bottom = BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK);
+
 
 	public GUI_Details_G(int i, JInternalFrame pan) {
 
@@ -61,7 +61,7 @@ public class GUI_Details_G extends JInternalFrame {
 	private void initialize() {
 
 //		System.out.println(name+vorname+strasse+ ort+  email+ mutter+ vater+  anmerkung+ bild);
-		setBorder(mb_bottom);
+		
 		setTitle(name);
 		setToolTipText("Details Gruppe");
 		setBounds(0, 0, 968, 628
