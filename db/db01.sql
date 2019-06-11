@@ -10,10 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-06-11 09:49:21
+Date: 2019-06-11 15:21:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `gruppen`
+-- ----------------------------
+DROP TABLE IF EXISTS `gruppen`;
+CREATE TABLE `gruppen` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) COLLATE latin1_german1_ci DEFAULT NULL,
+  `tag` varchar(15) COLLATE latin1_german1_ci DEFAULT NULL,
+  `anmerkung` varchar(500) COLLATE latin1_german1_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+-- ----------------------------
+-- Records of gruppen
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `kunden`
