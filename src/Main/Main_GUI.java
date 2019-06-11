@@ -118,7 +118,7 @@ public class Main_GUI {
 		lblGrp.setForeground(Color.BLUE);
 		lblGrp.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblGrp.setBounds(10, 72, 90, 20);
-		lblGrp.addMouseListener(new ML_Main(lblGrp));
+		lblGrp.addMouseListener(new ML_Main(lblGrp,panel_2));
 		panel_1.add(lblGrp);
 		
 		JLabel lblMitarbeiter = new JLabel(" Mitarbeiter");

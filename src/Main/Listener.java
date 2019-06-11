@@ -46,10 +46,22 @@ public class Listener implements InternalFrameListener
 			
 			Var.setBtn_new_m(false);
 		}
+		if (frame.getTitle()== "Neue Gruppe") {
+			
+			Var.setBtn_new_g(false);
+		}
 		
 		if (frame.getTitle() == "Kunden") {
 			
 			Var.setBtn_customer(false);
+		}
+		if (frame.getTitle() == "Mitarbeiter") {
+			
+			Var.setBtn_worker(false);
+		}
+		if (frame.getTitle() == "Gruppen") {
+			
+			Var.setBtn_group(false);
 		}
 		if (frame.getToolTipText()== "Info") {
 			

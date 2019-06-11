@@ -8,14 +8,25 @@ public class Var {
 
 	static boolean btn_new = false;
 	static boolean btn_new_m = false;
+	static boolean btn_new_g = false;
 	static boolean btn_customer = false;
 	static boolean btn_settings = false;
 	static boolean btn_edit = false;
 	static boolean btn_worker = false;
+	static boolean btn_group = false;
+	
 	static File propertiesFile = new File("config/config.properties");
 	static Properties properties = new Properties();
 	static String host; 
 	
+	public static boolean isBtn_group() {
+		return btn_group;
+	}
+
+	public static void setBtn_group(boolean btn_group) {
+		Var.btn_group = btn_group;
+	}
+
 	
 	public static boolean isBtn_worker() {
 		return btn_worker;
@@ -31,6 +42,15 @@ public class Var {
 
 	public static void setBtn_new_m(boolean btn_new_m) {
 		Var.btn_new_m = btn_new_m;
+	}
+	
+
+	public static boolean isBtn_new_g() {
+		return btn_new_g;
+	}
+
+	public static void setBtn_new_g(boolean btn_new_g) {
+		Var.btn_new_g = btn_new_g;
 	}
 
 	public static boolean isBtn_edit() {

@@ -1,16 +1,15 @@
 package Main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
-import kunden.GUI_Details_K;
+import gruppen.GUI_Gruppen;
+import gruppen.GUI_New_G;
 import kunden.GUI_Kunden;
 import kunden.GUI_New;
 import mitarbeiter.GUI_Mitarbeiter;
@@ -22,7 +21,7 @@ public class ML_Main implements MouseListener {
 	JDesktopPane panel;
 	Border ub = BorderFactory.createLoweredBevelBorder();
 	Border lb = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-	Object [] k_o_m = {"Kunde","Mitarbeiter"};
+	Object [] k_o_m = {"Kunde","Mitarbeiter","Gruppe"};
 	
 	
 	public ML_Main(JLabel lbl,JDesktopPane panel) {
@@ -50,6 +49,10 @@ public ML_Main(JLabel lbl) {
 				panel.add(new GUI_New_M());
 				Var.setBtn_new_m(true);
 			}
+			else if (i == 2) {
+				panel.add(new GUI_New_G());
+				Var.setBtn_new_g(true);
+			}
 		}
 			
 //		if (lbl.getToolTipText() == "Kunde bearbeiten" & Var.isBtn_edit() == false) {
@@ -63,7 +66,7 @@ public ML_Main(JLabel lbl) {
 			panel.add(new GUI_Kunden(panel));
 			Var.setBtn_customer(true);			
 		}
-		if (lbl.getToolTipText() == "Mitarbeiter" & Var.isBtn_customer() == false) {
+		if (lbl.getToolTipText() == "Mitarbeiter" & Var.isBtn_worker() == false) {
 			
 			panel.add(new GUI_Mitarbeiter(panel));
 			Var.setBtn_worker(true);			
@@ -72,6 +75,10 @@ public ML_Main(JLabel lbl) {
 			panel.add(new GUI_Settings());
 					Var.setBtn_settings(true);
 			}
+		if (lbl.getToolTipText() == "Gruppen" & Var.isBtn_group() == false) {
+			panel.add(new GUI_Gruppen(panel));
+			Var.setBtn_group(true);
+		}
 
 		}
 
