@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -85,11 +86,13 @@ private void startDetails(int row, int column) {
 		final DefaultTableModel model = new DefaultTableModel(){
 	    	public boolean isCellEditable(int row, int column)
 	    	{
-	    		clicked++;
-	    		if (clicked == 2) {
+	    		
+	    		int i =JOptionPane.showConfirmDialog(pan, "Wollen Sie diesen Kunden bearbeiten ?","Bearbeiten",JOptionPane.YES_NO_OPTION);
+	    		if(i == 0) { 
 	    		startDetails(row, column);
 	    		clicked =0;
 	    		}
+	    		
 	    		return false;
 	    	}
 		};
