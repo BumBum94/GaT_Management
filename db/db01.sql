@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-06-11 15:21:53
+Date: 2019-06-13 13:00:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `gruppen` (
   `tag` varchar(15) COLLATE latin1_german1_ci DEFAULT NULL,
   `anmerkung` varchar(500) COLLATE latin1_german1_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 -- ----------------------------
 -- Records of gruppen
@@ -50,9 +50,10 @@ CREATE TABLE `kunden` (
   `geschlecht` text COLLATE latin1_german1_ci NOT NULL,
   `geburtstag` text COLLATE latin1_german1_ci,
   `anmerkung` text COLLATE latin1_german1_ci NOT NULL,
+  `id_grp` int(5) DEFAULT NULL,
   `bild` text COLLATE latin1_german1_ci,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 -- ----------------------------
 -- Records of kunden
@@ -78,7 +79,7 @@ CREATE TABLE `mitarbeiter` (
   `anmerkung` varchar(500) COLLATE latin1_german1_ci DEFAULT NULL,
   `bild` varchar(500) COLLATE latin1_german1_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 -- ----------------------------
 -- Records of mitarbeiter
