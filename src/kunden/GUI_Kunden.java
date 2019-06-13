@@ -103,7 +103,7 @@ private void startDetails(int row, int column) {
 	    	}
 		};
 		
-		model.setColumnIdentifiers(new Object[] {"ID","Name","Vorname","Starﬂe","Hausnr.","Plz","Ort"});
+		model.setColumnIdentifiers(new Object[] {"ID","Name","Vorname","Starﬂe","Hausnr.","Plz","Ort","Gruppe"});
 		 
 		 Random random = new Random();
 	        try {
@@ -124,8 +124,10 @@ private void startDetails(int row, int column) {
 	//Erstellt ein Objekt mit Informationen aus der Datenbank.
 	private Object[] fillTable() throws SQLException {
 		
+		MySQLZugriff mg = new MySQLZugriff(mz.rs.getInt("id_grp"),"gruppen");
+		mg.rs_g.next();
 	Object[] row = new Object[] {mz.rs.getInt("ID"),mz.rs.getString("name"),mz.rs.getString("vorname"),mz.rs.getString("strasse"),
-			mz.rs.getInt("hausnr"),mz.rs.getInt("plz"),mz.rs.getString("Ort")};
+			mz.rs.getInt("hausnr"),mz.rs.getInt("plz"),mz.rs.getString("Ort"),mg.rs_g.getString("name")};
 	
 	System.out.println("fetig");
 	return row;

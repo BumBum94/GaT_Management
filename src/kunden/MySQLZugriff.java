@@ -7,8 +7,9 @@ import Main.Var;
 
 public class MySQLZugriff {
 	
-	Statement stmt;       
+	protected Statement stmt;              
 	public ResultSet rs;
+	public ResultSet rs_g;
 	Connection con;
 	
 	//Stellt Verbindung mit der Datenbank her somit können alles informationen der Tablle kunden gehohlt werden 
@@ -35,7 +36,7 @@ public class MySQLZugriff {
 	}
 	
 	//Stellt Verbindung mit der Datenbank her gibt aber nur informationen vom Kunden mit der ID = übergebene int.
-public MySQLZugriff(int id) {
+public MySQLZugriff(int id,String db) {
 
 	
 		
@@ -49,7 +50,8 @@ public MySQLZugriff(int id) {
 			con = DriverManager.getConnection(url,Var.getUser(),Var.getPw());        
 			stmt = con.createStatement();
 			
-			rs = stmt.executeQuery("SELECT * FROM kunden WHERE(ID ="+id+");");
+			rs = stmt.executeQuery("SELECT * FROM "+db+" WHERE(ID ="+id+");");
+			rs_g = stmt.executeQuery("SELECT * FROM "+db+" WHERE(ID ="+id+");");
 			
 
 			

@@ -59,7 +59,7 @@ public class GUI_Details_K extends JInternalFrame {
 		
 		this.pan = pan;
 		this.id = i;
-		mz= new MySQLZugriff(i);
+		mz= new MySQLZugriff(i,"kunden");
 		try {
 			mz.rs.next();
 			name = mz.rs.getString("name");
