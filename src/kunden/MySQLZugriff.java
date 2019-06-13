@@ -12,7 +12,7 @@ public class MySQLZugriff {
 	Connection con;
 	
 	//Stellt Verbindung mit der Datenbank her somit können alles informationen der Tablle kunden gehohlt werden 
-	public MySQLZugriff(String db_tabel) {
+	public MySQLZugriff(String table) {
 
 		
 		try {
@@ -26,7 +26,7 @@ public class MySQLZugriff {
 			con = DriverManager.getConnection(url,Var.getUser(),Var.getPw());        
 			stmt = con.createStatement();
 			
-			rs = stmt.executeQuery("SELECT name,vorname,strasse,hausnr,plz, ort, telnr, email, mutter, vater, geschlecht,geburtstag, anmerkung, bild, id FROM "+db_tabel);
+			rs = stmt.executeQuery("SELECT * FROM "+table);
 			
 			
 		} catch (Exception e) {
