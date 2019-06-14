@@ -57,6 +57,7 @@ public class GUI_Settings extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				Var.setBtn_settings(false);
+				Var.setProbs();
 				dispose();
 			}
 		});
