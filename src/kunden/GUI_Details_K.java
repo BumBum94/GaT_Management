@@ -1,8 +1,10 @@
 package kunden;
 
 import javax.swing.JInternalFrame;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,6 +19,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Choice;
 import javax.swing.JTextArea;
@@ -25,6 +29,12 @@ import Main.AL;
 import Main.Listener;
 import Main.SetMaxText;
 import Main.Var;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
+import java.awt.LayoutManager;
+import java.awt.GridLayout;
 
 
 
@@ -43,23 +53,28 @@ public class GUI_Details_K extends JInternalFrame {
 	protected static JTextField txtVater;
 	protected static JTextField txtGeb1;
 	protected static JTextArea txtAA;
+	protected static JScrollPane scrollPane;
+	
+	ButtonGroup b_grp = new ButtonGroup();
 	Choice choice_gesch;
 	JLabel image;
-	int id;
+	int id,g_id;
 	JInternalFrame pan;
+	JDesktopPane jpan;
 	
 	String name,vorname,strasse, ort,  email, mutter, vater,  anmerkung, bild, geb;
 	int hausnr,plz,telnr,geschlecht;
 	
 	
 	private AL_GUI_New al = new AL_GUI_New(this);
-	private MySQLZugriff mz;
+	private MySQLZugriff mz,mg;
 	
-	public GUI_Details_K(int i,JInternalFrame pan) {
+	public GUI_Details_K(int i,JInternalFrame pan, JDesktopPane jpan) {
 		
 		this.pan = pan;
+		this.jpan= jpan;
 		this.id = i;
-		mz= new MySQLZugriff(i,"kunden");
+		mz= new MySQLZugriff(i);
 		try {
 			mz.rs.next();
 			name = mz.rs.getString("name");
@@ -76,6 +91,7 @@ public class GUI_Details_K extends JInternalFrame {
 			plz = mz.rs.getInt("plz");
 			telnr = mz.rs.getInt("telnr");
 			geschlecht = numofGesch(mz.rs.getString("geschlecht"));
+			g_id = mz.rs.getInt("id_grp");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +114,7 @@ public class GUI_Details_K extends JInternalFrame {
 		setIconifiable(true);
 		getContentPane().setLayout(null);
 //		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		addInternalFrameListener(new Listener(this,pan));
+		addInternalFrameListener(new Listener(this,pan,jpan));
 		
 		
 		JButton btnSchlieen = new JButton("Beenden");
@@ -265,7 +281,7 @@ public class GUI_Details_K extends JInternalFrame {
 		
 		txtAA = new JTextArea();
 		txtAA.setText(anmerkung);
-		txtAA.setBounds(30, 480, 471, 100);
+		txtAA.setBounds(30, 480, 200, 100);
 		getContentPane().add(txtAA);
 		
 		  image = new JLabel("", new ImageIcon(bild), JLabel.CENTER);
@@ -278,11 +294,59 @@ public class GUI_Details_K extends JInternalFrame {
 		btnBildAuswahl.setBounds(774, 297, 120, 23);
 		btnBildAuswahl.addActionListener(al);
 		getContentPane().add(btnBildAuswahl);
+		
+		JLabel label = new JLabel("Gruppe");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		label.setBounds(300, 450, 100, 20);
+		getContentPane().add(label);
+		
+		scrollPane = new JScrollPane(grpList());
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(300, 480, 200, 100);
+		getContentPane().add(scrollPane);
+		
 		setVisible(true);
 		
 		
 		
 	}
+	
+	private JPanel grpList() {
+		JPanel x = new JPanel(new GridLayout(0, 1));
+		
+		mg = new MySQLZugriff("gruppen");
+		try {
+			while (mg.rs.next()) {
+				
+				JRadioButton jrb = new JRadioButton(mg.rs.getString("name"));
+				if (g_id == mg.rs.getInt("ID")) {
+					
+				jrb.setSelected(true);
+				}
+				
+				jrb.setToolTipText(String.valueOf(mg.rs.getInt("ID")));
+				jrb.addActionListener(new ActionListener() {
+
+					public void actionPerformed(ActionEvent e) {
+
+						g_id = Integer.parseInt(jrb.getToolTipText());
+
+					}
+				});
+				b_grp.add(jrb);
+				x.add(jrb);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return x;
+	}
+
+	
 	  private int numofGesch(String geschlecht) {
 			
 			int i ; 
@@ -329,6 +393,8 @@ class AL_GUI_New implements ActionListener{
 			Var.setBtn_edit(false);
 			try {
 				pan.setIcon(false);
+				jpan.remove(pan);
+				jpan.add(new GUI_Kunden(jpan));
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -346,7 +412,7 @@ class AL_GUI_New implements ActionListener{
 										+ "telnr='"+Integer.parseInt(txtTelNum.getText())+"',email='"+txtEmail.getText()+"',"
 												+ "mutter='"+txtMutter.getText()+"', vater='"+txtVater.getText()+"',"
 														+ "geschlecht='"+choice_gesch.getSelectedItem()+"',geburtstag='"+txtGeb1.getText()+
-														"',anmerkung='"+txtAA.getText()+"'"
+														"',anmerkung='"+txtAA.getText()+"',id_grp='"+g_id+"'"
 																+ "WHERE ID="+id);
 				
 				System.out.println("Fertig");
@@ -359,7 +425,7 @@ class AL_GUI_New implements ActionListener{
 											+ "telnr='"+Integer.parseInt(txtTelNum.getText())+"',email='"+txtEmail.getText()+"',"
 													+ "mutter='"+txtMutter.getText()+"', vater='"+txtVater.getText()+"',"
 															+ "geschlecht='"+choice_gesch.getSelectedItem()+"',anmerkung='"+txtAA.getText()+"',"
-																	+ "bild='KundenImg/"+file.getName()+"' WHERE ID="+id);
+																	+ "bild='KundenImg/"+file.getName()+"',id_grp='"+g_id+"' WHERE ID="+id);
 					System.out.println("Fertig");
 					mz.con.close();
 				}

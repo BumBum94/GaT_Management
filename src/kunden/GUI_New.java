@@ -55,11 +55,12 @@ public class GUI_New extends JInternalFrame {
 	protected static JScrollPane scrollPane;
 
 	Choice choice_gesch;
-	ButtonGroup b_grp = new ButtonGroup();
-
+	
 	private AL_GUI_New al = new AL_GUI_New(this);
 	private MySQLZugriff mz;
 	int g_id;
+	ButtonGroup b_grp = new ButtonGroup();
+	
 
 	public GUI_New() {
 		setBorder(null);

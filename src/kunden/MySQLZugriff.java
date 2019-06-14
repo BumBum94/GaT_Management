@@ -59,5 +59,29 @@ public MySQLZugriff(int id,String db) {
 			System.out.println("Fail"+e);
 		}
 	}
+public MySQLZugriff(int id) {
+	
+	
+	
+	try {
+		
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		System.out.println(Var.getHost());
+		String url     = "jdbc:mysql://"+Var.getHost()+":"+Var.getPort()+"/"+Var.getDb();  
+		System.out.println(url);
+		con = DriverManager.getConnection(url,Var.getUser(),Var.getPw());        
+		stmt = con.createStatement();
+		
+		rs = stmt.executeQuery("SELECT * FROM kunden WHERE(ID ="+id+");");
+		
+		
+		
+		
+	} catch (Exception e) {
+		System.out.println("Fail"+e);
+	}
+}
+
 
 }

@@ -3,15 +3,19 @@ package Main;
 
 import java.beans.PropertyVetoException;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
+
+import kunden.GUI_Kunden;
 
 
 //Listener der die eingabe in die ToolBar der InternalFrames überwacht.
 public class Listener implements InternalFrameListener
 {
 	JInternalFrame frame,pan;
+	JDesktopPane jpan;
 	
 	public Listener(JInternalFrame frame) {
 		
@@ -21,6 +25,11 @@ public class Listener implements InternalFrameListener
 	public Listener(JInternalFrame frame,JInternalFrame pan) {
 		this.pan = pan;
 		this.frame = frame;
+	}
+	public Listener(JInternalFrame frame,JInternalFrame pan,JDesktopPane jpan) {
+		this.pan = pan;
+		this.frame = frame;
+		this.jpan = jpan;
 	}
 
 	@Override
@@ -68,6 +77,8 @@ public class Listener implements InternalFrameListener
 			Var.setBtn_edit(false);
 			try {
 				pan.setIcon(false);
+				jpan.remove(pan);
+				jpan.add(new GUI_Kunden(jpan));
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

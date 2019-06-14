@@ -45,7 +45,7 @@ private void startDetails(int row, int column) {
 		
 		int i =JOptionPane.showConfirmDialog(pan, "Wollen Sie "+vname+" "+name+" bearbeiten ?","Bearbeiten",JOptionPane.YES_NO_OPTION);
 		if(i == 0) { 
-		pan.add(new GUI_Details_K(x,this));
+		pan.add(new GUI_Details_K(x,this,pan));
 		System.out.println(x);
 		try {
 			setIcon(true);

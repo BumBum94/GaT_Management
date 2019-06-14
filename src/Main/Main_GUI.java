@@ -35,6 +35,7 @@ public class Main_GUI {
 	Border mb_top = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK);
 	Border mb_side = BorderFactory.createMatteBorder(0, 0, 0, 2, Color.BLACK);
 	
+	
 	public Main_GUI() {
 		initialize();
 	}
